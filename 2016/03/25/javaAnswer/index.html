@@ -6,15 +6,27 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>littleKang的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
+  <meta name="description" content="##java常见面试题及答案
+###1.什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言”？
+
+Java 虚拟机是一个可以执行 Java 字节码的虚拟机进程。Java 源文件被编译成能被 Java 虚拟机执行的字节码文件。Java 被设计成允许应用程序可以运行在任意的平台，而不需要程序员为每一个平台单独重写或者是重新编译。Java 虚拟机让这个变为可能，因为它知道底层硬件平台的指令">
+<meta property="og:type" content="article">
 <meta property="og:title" content="littleKang的博客">
-<meta property="og:url" content="http://www.littleKang.com/index.html">
+<meta property="og:url" content="http://www.littleKang.com/2016/03/25/javaAnswer/index.html">
 <meta property="og:site_name" content="littleKang的博客">
-<meta property="og:description">
+<meta property="og:description" content="##java常见面试题及答案
+###1.什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言”？
+
+Java 虚拟机是一个可以执行 Java 字节码的虚拟机进程。Java 源文件被编译成能被 Java 虚拟机执行的字节码文件。Java 被设计成允许应用程序可以运行在任意的平台，而不需要程序员为每一个平台单独重写或者是重新编译。Java 虚拟机让这个变为可能，因为它知道底层硬件平台的指令">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/277730-377221ab99d50e0e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-05-09T06:30:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="littleKang的博客">
-<meta name="twitter:description">
+<meta name="twitter:description" content="##java常见面试题及答案
+###1.什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言”？
+
+Java 虚拟机是一个可以执行 Java 字节码的虚拟机进程。Java 源文件被编译成能被 Java 虚拟机执行的字节码文件。Java 被设计成允许应用程序可以运行在任意的平台，而不需要程序员为每一个平台单独重写或者是重新编译。Java 虚拟机让这个变为可能，因为它知道底层硬件平台的指令">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/277730-377221ab99d50e0e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternative" href="/atom.xml" title="littleKang的博客" type="application/atom+xml">
   
@@ -200,95 +212,7 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
-  
-    <article id="post-AndroidStart" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/05/12/AndroidStart/" class="article-date">
-  	<time datetime="2016-05-12T06:07:27.000Z" itemprop="datePublished">2016-05-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/12/AndroidStart/">Android从按下开机键到启动发生了什么</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>作为一个Android开发者，了解整个系统架构是必须的，所以这篇就总结一下Android手机从按下开机键到启动这一过程发生了什么。</p>
-<p>要了解Android手机启动过程，我们先来了解一下基于linux系统的电脑从按下电源键的那一刻起，发生了什么，这样类比可以更好的理解Android手机的启动过程。</p>
-<h3 id="基于Linux的pc启动过程"><a href="#基于Linux的pc启动过程" class="headerlink" title="基于Linux的pc启动过程"></a>基于Linux的pc启动过程</h3><p>我们都知道，所有的程序软件包括操作系统都是运行在内存中的，然而我们的操作系统一般是存放在硬盘上的，当我们按下开机键的时候，此时内存中什么程序也没有，因此需要借助某种方式，将操作系统加载到内存中，而完成这项任务的就是<strong>BIOS</strong>。</p>
-<p>装过系统的人一定知道BIOS这个东西，那么它究竟是什么呢？<br>BIOS：Basic Input/Output System（基本输入输出系统），在IBM PC兼容系统上，是一种业界标准的固件接口（来自维基百科）。有点难以理解，其实BIOS是我们电脑启动时加载的第一个程序，这个程序不是由Java语言编写也不是由C语言编写，一般是汇编程序。BIOS程序固化在主板上的一块芯片上，是连接计算机硬件与操作系统的桥梁，它保存着计算机最重要的基本输入输出的程序、开机后自检程序和系统自启动程序。</p>
-<p>那么问题来了，BIOS程序又是怎么启动的？BIOS的启动，是由硬件完成的，Intel 80x86<br>系列的cpu的硬件都设计为加电（即开机瞬间）就进入16位实模式状态运行，此时将cpu的硬件逻辑设计为强行将CS的值设置为0xFFFF,IP的值设置为0x0000，这样CS:IP就指向了0xFFFF0这个位置，而这个位置就是BIOS程序的入口地址。因此这是一个硬件厂商之间的约定，所有的BIOS程序入口地址均为0xFFFF0，这样在开机的时候，就找到这个地址，如果该地址并没有代码段，那么计算机将会死机，如果这个地址处有代码段，将会执行这个代码段，并由此执行下去，即BIOS程序开始启动。<br><br><strong>补充：</strong><br><br>CS:代码段寄存器，存在于CPU中，指向CPU当前执行代码在内存中所在的区域。<br><br>IP：指令寄存器，存在于CPU中，记录将要执行的指令在代码段内的偏移地址，与CS组合即为将要执行的指令的内存地址。</p>
-<p>当BIOS程序启动时，就会检测硬件设备，比如我们的显卡、内存等信息。BIOS会在内存中建立中断向量表和中断服务程序。中断向量表中有256个中断向量，每个中断向量占4个字节，每个中断向量指向一个中断服务程序，这些中断服务程序完成了将操作系统由硬盘加载到内存中的任务。</p>
-<p>基于linux的操作系统而言，计算机将分三批逐次加载操作系统的代码，第一批由BIOS中断int 0x19将第一扇区bootsect的内容加载到内存；第二批和第三批在bootsect的指挥下，分别加载后面扇区的内容到内存中。</p>
-<p>经过执行一系列的BIOS代码后，计算机完成了自检等操作，计算机硬件体系会与BIOS联合操作，让cpu接收到一个int 0x19中断，cpu接收到这个中断后，会立即在中断向量表中找到int 0x19中断向量，此时会找到对应的中断服务程序，并由该中断服务程序将硬盘中第一个扇区的引导程序加在到内存中的指定位置。随后，在引导程序的作用下，陆续将操作系统的其他程序载入内存，完成实模式到保护模式的转变，为执行操作系统的入口函数main做准备，后面就是操作系统的初始化工作了，最后完成计算机的启动。</p>
-<h3 id="Android手机的启动过程"><a href="#Android手机的启动过程" class="headerlink" title="Android手机的启动过程"></a>Android手机的启动过程</h3><p>Android系统虽然也是基于linux系统的，但是由于Android属于嵌入式设备，并没有像pc那样的BIOS程序。取而代之的是Bootloader——系统启动加载器。它类似于BIOS，在系统加载前，用以初始化硬件设备，建立内存空间的映像图，为最终调用系统内核准备好环境。在Android里没有硬盘，而是ROM，它类似于硬盘存放操作系统，用户程序等。ROM跟硬盘一样也会划分为不同的区域，用于放置不同的程序，在Android中主要划分为一下几个分区：</p>
-<ul>
-<li>/boot：存放引导程序，包括内核和内存操作程序</li>
-<li>/system：相当于电脑c盘，存放Android系统及系统应用</li>
-<li>/recovery：恢复分区，可以进入该分区进行系统恢复</li>
-<li>/data：用户数据区，包含了用户的数据：联系人、短信、设置、用户安装的程序</li>
-<li>/cache：安卓系统缓存区，保存系统最常访问的数据和应用程序</li>
-<li>/misc：包含一些杂项内容，如系统设置和系统功能启用禁用设置</li>
-<li>/sdcard：用户自己的存储区，可以存放照片，音乐，视频等文件</li>
-</ul>
-<p>那么Bootloader是如何被加载的呢？我们可以想到，应该跟pc一样，当开机加电的时候，cpu会从cpu制造厂商预设的地址上取指令，这个地址是各厂商约定俗称的，类似于上面80x86架构里的0xFFFF0地址，因此Android手机会将固态存储设备ROM预先映射到该地址上，当开机加电的时候，cpu就会从该地址执行/boot分区下的Bootloader程序，载入linux内核到RAM中。</p>
-<p>当linux内核启动后会初始化各种软硬件环境，加载驱动程序，挂载根文件系统，并开始执行根文件系统的init程序，init程序是Android启动过程中最重要的核心程序。</p>
-<p>init进程是Android系统中用户进程的鼻祖进程。init进程会启动各种系统本地服务，如：Media Server、Service Manager、bootanim（开机动画）等。init进程会在解析init.rc文件后fork出Zygote，而Zygote是所有Java进程的父进程，我们的App都是由Zygote fork出来的。</p>
-<p>Zygote进程主要包含：</p>
-<ul>
-<li>加载ZygoteInit类，注册Zygote Socket服务端套接字；</li>
-<li>加载虚拟机；</li>
-<li>预加载Android核心类</li>
-<li>预加载系统资源</li>
-</ul>
-<p>随后Zygote进程会fork出System Server进程，System Server进程负责启动和管理整个framework，包括Activity Manager，PowerManager等服务。</p>
-<p>当System Server将系统服务启动就绪后，就会通知ActivityManager启动首个Android程序Home即我们看到的桌面程序。</p>
-<p>至此，从Android手机开机到看到桌面程序所有过程分析完了。</p>
-<p>最后附一张整体流程图，帮助更好理解（出处在下面参考链接中）</p>
-<p><img src="http://gityuan.com/images/android-process/android-boot.jpg" alt=""></p>
-<p>参考：<br><br><a href="">http://blog.chinaunix.net/uid-26569496-id-3891554.html</a> <br><br><a href="">http://ticktick.blog.51cto.com/823160/1659473</a><br><br><a href="">http://gityuan.com/2016/01/30/android-boot/</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-javaAnswer" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-javaAnswer" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/03/25/javaAnswer/" class="article-date">
@@ -684,29 +608,72 @@ else
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/12/AndroidStart/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Android从按下开机键到启动发生了什么
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
   
 </article>
 
 
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
 
 
 
 
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="javaAnswer" data-title="" data-url="http://www.littleKang.com/2016/03/25/javaAnswer/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-  
-  
+
+
+
 </div>
       <footer id="footer">
   <div class="outer">
@@ -730,8 +697,8 @@ else
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
