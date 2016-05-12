@@ -19,7 +19,7 @@ Java 虚拟机是一个可以执行 Java 字节码的虚拟机进程。Java 源�
 
 2.JDK和JRE">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/277730-377221ab99d50e0e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-05-12T06:27:54.000Z">
+<meta property="og:updated_time" content="2016-05-12T06:44:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java常见面试题及答案">
 <meta name="twitter:description" content="1.什么是Java虚拟机？为什么Java被称作是“平台无关的编程语言”？
@@ -258,8 +258,7 @@ Java 虚拟机是一个可以执行 Java 字节码的虚拟机进程。Java 源�
 <blockquote>
 <p><strong>static</strong>方法时编译时静态绑定的，属于类，而覆盖是运行时动态绑定的(动态绑定的多态),因此不能覆盖.</p>
 </blockquote>
-<p>###4.Java支持的基本数据类型有哪些？什么是自动拆装箱？</p>
-<blockquote>
+<h3 id="4-Java支持的基本数据类型有哪些？什么是自动拆装箱？"><a href="#4-Java支持的基本数据类型有哪些？什么是自动拆装箱？" class="headerlink" title="4.Java支持的基本数据类型有哪些？什么是自动拆装箱？"></a>4.Java支持的基本数据类型有哪些？什么是自动拆装箱？</h3><blockquote>
 <p>java支持的基本数据类型有以下9种:byte,shot,int,long,float,double,char,boolean,void.<br><br>自动拆装箱是java从jdk1.5引用，目的是将原始类型自动的装换为相对应的对象，也可以逆向进行，即拆箱。这也体现java中一切皆对象的宗旨。<br><br>所谓自动装箱就是将原始类型自动的转换为对应的对象，而拆箱就是将对象类型转换为基本类型。java中的自动拆装箱通常发生在变量赋值的过程中，如：</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Integer object = <span class="number">3</span>; <span class="comment">//自动装箱</span></span><br><span class="line"><span class="keyword">int</span> o = object; <span class="comment">//拆箱</span></span><br></pre></td></tr></table></figure>
