@@ -4,25 +4,25 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>littleKang的博客</title>
+  <title>Android从按下开机键到启动发生了什么 | littleKang的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title:Android从按下开机键到启动发生了什么作为一个Android开发者，了解整个系统架构是必须的，所以这篇就总结一下Android手机从按下开机键到启动这一过程发生了什么。
+  <meta name="description" content="作为一个Android开发者，了解整个系统架构是必须的，所以这篇就总结一下Android手机从按下开机键到启动这一过程发生了什么。
 要了解Android手机启动过程，我们先来了解一下基于linux系统的电脑从按下电源键的那一刻起，发生了什么，这样类比可以更好的理解Android手机的启动过程。
-基于Linux的pc启动过程我们都知道，所有的程">
+基于Linux的pc启动过程我们都知道，所有的程序软件包括操作系统都是运行在内存中的，然而我们的操作系统">
 <meta property="og:type" content="article">
-<meta property="og:title" content="littleKang的博客">
+<meta property="og:title" content="Android从按下开机键到启动发生了什么">
 <meta property="og:url" content="http://www.littleKang.com/2016/05/12/AndroidStart/index.html">
 <meta property="og:site_name" content="littleKang的博客">
-<meta property="og:description" content="title:Android从按下开机键到启动发生了什么作为一个Android开发者，了解整个系统架构是必须的，所以这篇就总结一下Android手机从按下开机键到启动这一过程发生了什么。
+<meta property="og:description" content="作为一个Android开发者，了解整个系统架构是必须的，所以这篇就总结一下Android手机从按下开机键到启动这一过程发生了什么。
 要了解Android手机启动过程，我们先来了解一下基于linux系统的电脑从按下电源键的那一刻起，发生了什么，这样类比可以更好的理解Android手机的启动过程。
-基于Linux的pc启动过程我们都知道，所有的程">
+基于Linux的pc启动过程我们都知道，所有的程序软件包括操作系统都是运行在内存中的，然而我们的操作系统">
 <meta property="og:image" content="http://gityuan.com/images/android-process/android-boot.jpg">
-<meta property="og:updated_time" content="2016-05-12T06:12:13.000Z">
+<meta property="og:updated_time" content="2016-05-12T06:13:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="littleKang的博客">
-<meta name="twitter:description" content="title:Android从按下开机键到启动发生了什么作为一个Android开发者，了解整个系统架构是必须的，所以这篇就总结一下Android手机从按下开机键到启动这一过程发生了什么。
+<meta name="twitter:title" content="Android从按下开机键到启动发生了什么">
+<meta name="twitter:description" content="作为一个Android开发者，了解整个系统架构是必须的，所以这篇就总结一下Android手机从按下开机键到启动这一过程发生了什么。
 要了解Android手机启动过程，我们先来了解一下基于linux系统的电脑从按下电源键的那一刻起，发生了什么，这样类比可以更好的理解Android手机的启动过程。
-基于Linux的pc启动过程我们都知道，所有的程">
+基于Linux的pc启动过程我们都知道，所有的程序软件包括操作系统都是运行在内存中的，然而我们的操作系统">
 <meta name="twitter:image" content="http://gityuan.com/images/android-process/android-boot.jpg">
   
     <link rel="alternative" href="/atom.xml" title="littleKang的博客" type="application/atom+xml">
@@ -88,7 +88,7 @@
 						<li>Links</li>
 						
 						
-						<li>A propos</li>
+						<li>Über</li>
 						
 					</ul>
 				</div>
@@ -222,10 +222,27 @@
       <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android从按下开机键到启动发生了什么
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<h2 id="title-Android从按下开机键到启动发生了什么"><a href="#title-Android从按下开机键到启动发生了什么" class="headerlink" title="title:Android从按下开机键到启动发生了什么"></a>title:Android从按下开机键到启动发生了什么</h2><p>作为一个Android开发者，了解整个系统架构是必须的，所以这篇就总结一下Android手机从按下开机键到启动这一过程发生了什么。</p>
+        <p>作为一个Android开发者，了解整个系统架构是必须的，所以这篇就总结一下Android手机从按下开机键到启动这一过程发生了什么。</p>
 <p>要了解Android手机启动过程，我们先来了解一下基于linux系统的电脑从按下电源键的那一刻起，发生了什么，这样类比可以更好的理解Android手机的启动过程。</p>
 <h3 id="基于Linux的pc启动过程"><a href="#基于Linux的pc启动过程" class="headerlink" title="基于Linux的pc启动过程"></a>基于Linux的pc启动过程</h3><p>我们都知道，所有的程序软件包括操作系统都是运行在内存中的，然而我们的操作系统一般是存放在硬盘上的，当我们按下开机键的时候，此时内存中什么程序也没有，因此需要借助某种方式，将操作系统加载到内存中，而完成这项任务的就是<strong>BIOS</strong>。</p>
 <p>装过系统的人一定知道BIOS这个东西，那么它究竟是什么呢？<br>BIOS：Basic Input/Output System（基本输入输出系统），在IBM PC兼容系统上，是一种业界标准的固件接口（来自维基百科）。有点难以理解，其实BIOS是我们电脑启动时加载的第一个程序，这个程序不是由Java语言编写也不是由C语言编写，一般是汇编程序。BIOS程序固化在主板上的一块芯片上，是连接计算机硬件与操作系统的桥梁，它保存着计算机最重要的基本输入输出的程序、开机后自检程序和系统自启动程序。</p>
@@ -305,7 +322,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="AndroidStart" data-title="" data-url="http://www.littleKang.com/2016/05/12/AndroidStart/"></div>
+	<div class="ds-thread" data-thread-key="AndroidStart" data-title="Android从按下开机键到启动发生了什么" data-url="http://www.littleKang.com/2016/05/12/AndroidStart/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
