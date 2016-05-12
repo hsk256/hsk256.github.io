@@ -250,6 +250,76 @@
 
 
   
+    <article id="post-ProxyModel" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/25/ProxyModel/" class="article-date">
+  	<time datetime="2016-03-25T14:50:10.000Z" itemprop="datePublished">2016-03-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/25/ProxyModel/">代理模式</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="什么是代理模式"><a href="#什么是代理模式" class="headerlink" title="什么是代理模式?"></a>什么是代理模式?</h3><p>举个生活中的例子：代理商。我们生活中买的许多物品都是通过代理商那里购买的，比如旅行社，代理旅行、机票等业务，代理出口商品。代理商并不产生这些产品，他们是从厂家拿货，所以虽然是通过代理商那里买到了产品，实际物品还是属于厂家那里。代理商作为一种中间层，可以为消费者带来许多遍历，消费者不需要购买物品的时候跑到生产厂家。</p>
+<p>再举个例子：老板与秘书。老板一般都很忙，如果一个客户相要见老板，打电话给老板，接电话的都是老板的秘书，然后由秘书再向老板转告，老板如果档期已满，则秘书直接告诉客户，今天无法见面。这里秘书也起到了一个代理的作用，秘书作为客户和老板之间的中间层，减轻了老板的工作量，或者阻挡了一些不想见的客户。</p>
+<p>代理模式与上面两个例子基本类似。比如客户端和服务器端的通信（类比客户与老板间），代理作为中间层，当客户端请求服务器时，则会先经过代理，然后由代理去请求服务器，而此时客户端并不知道访问的是代理。这样的好处就是，减轻了服务器的压力，当请求大量资源，比如图片，或者服务器要处理很长时间时，通过代理就可以先返回一部分图片给客户端，而不是让用户一直等待。</p>
+<p>代理可以控制对实际对象的访问。比如客户端向服务器端请求时，可能需要验证客户端的身份，那么代理就可以起这个作用，验证客户端的身份，控制客户端对服务器的请求。</p>
+<h3 id="代理模式的结构"><a href="#代理模式的结构" class="headerlink" title="代理模式的结构"></a>代理模式的结构</h3><ol>
+<li>抽象主题(Subject)：它是一个接口，代理和实际主题（对象）要共同实现这个接口。</li>
+<li>实际主题（类比服务器）：实际主题就是代理要代理的对象，该对象实现了抽象主题。</li>
+<li>代理(Proxy):代理是实现抽象主题的类，代理类中包含实际主题的一个引用，通过这个引用就可以控制对实际主题的访问，达到代理的目的。<h3 id="代理模式UML类图"><a href="#代理模式UML类图" class="headerlink" title="代理模式UML类图"></a>代理模式UML类图</h3></li>
+</ol>
+<p><img src="http://i.imgur.com/oh3VMNs.gif" alt=""></p>
+<h3 id="实现（客户老板例子）"><a href="#实现（客户老板例子）" class="headerlink" title="实现（客户老板例子）"></a>实现（客户老板例子）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//抽象接口，秘书和老板类都要实现这个接口，他们有共同的hearPhone方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">hearPhone</span><span class="params">(String s)</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//实际主题，老板类</span></span><br><span class="line"><span class="keyword">public</span> class Boss implements Employee </span>&#123;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">hearPhone</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(s.contains(<span class="string">"买"</span>)) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"好的，我们约个时间谈谈"</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(s.contains(<span class="string">"吃饭"</span>)) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"没问题"</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"不见"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//代理，秘书类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Secretary</span> <span class="keyword">implements</span> <span class="title">Employee</span></span>&#123;</span><br><span class="line">Boss boss;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Secretary</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	boss = <span class="keyword">new</span> Boss();</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">hearPhone</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">		String back  = boss.hearPhone(s);</span><br><span class="line">		<span class="keyword">return</span> back;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//测试类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	Secretary secretary = <span class="keyword">new</span> Secretary();</span><br><span class="line">	String back = secretary.hearPhone(<span class="string">"老张啊，一块吃饭吧"</span>);</span><br><span class="line">	System.out.println(back);</span><br><span class="line">	back = secretary.hearPhone(<span class="string">"那个老张啊，那个钱什么时候换呢"</span>);</span><br><span class="line">	System.out.println(back);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结果</span></span><br><span class="line">没问题</span><br><span class="line">不见</span><br></pre></td></tr></table></figure>
+<h3 id="代理模式的优点"><a href="#代理模式的优点" class="headerlink" title="代理模式的优点"></a>代理模式的优点</h3><ol>
+<li>解耦:屏蔽用户真正请求的对象，使用户与真正对象之间解耦。</li>
+<li>使用代理来担当那些创建耗时的对象的替身<h3 id="代理的使用场景"><a href="#代理的使用场景" class="headerlink" title="代理的使用场景"></a>代理的使用场景</h3></li>
+<li>不希望用户直接访问某个对象，可以使用代理作为中间层，控制对当前对象的访问。</li>
+<li>一个对象需要很长的时间才能加载完成，比如大的图片。</li>
+<li>当对象处于远程主机上，需要为用户提供访问该远程对象的能力。</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-javaAnswer" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
