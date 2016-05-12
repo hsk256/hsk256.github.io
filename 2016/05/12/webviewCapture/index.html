@@ -7,21 +7,18 @@
   <title>WebView截屏的三种方式 | littleKang的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="第一种方式
-通过调用webview.capturePicture(),得到一个picture对象，根据图像的宽和高创建一个Bitmap,再创建一个canvas，绑定bitmap，最后用picture去绘制。
-12345678910111213//获取Picture对象Picture picture = wv_capture.capturePicture();//得到图片的宽和高（没有reflect">
+通过调用webview.capturePicture(),得到一个picture对象，根据图像的宽和高创建一个Bitmap,再创建一个canvas，绑定bitmap，最后用picture去绘制。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WebView截屏的三种方式">
 <meta property="og:url" content="littleKang.cn/2016/05/12/webviewCapture/index.html">
 <meta property="og:site_name" content="littleKang的博客">
 <meta property="og:description" content="第一种方式
-通过调用webview.capturePicture(),得到一个picture对象，根据图像的宽和高创建一个Bitmap,再创建一个canvas，绑定bitmap，最后用picture去绘制。
-12345678910111213//获取Picture对象Picture picture = wv_capture.capturePicture();//得到图片的宽和高（没有reflect">
-<meta property="og:updated_time" content="2016-05-12T13:28:36.000Z">
+通过调用webview.capturePicture(),得到一个picture对象，根据图像的宽和高创建一个Bitmap,再创建一个canvas，绑定bitmap，最后用picture去绘制。">
+<meta property="og:updated_time" content="2016-05-12T13:29:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WebView截屏的三种方式">
 <meta name="twitter:description" content="第一种方式
-通过调用webview.capturePicture(),得到一个picture对象，根据图像的宽和高创建一个Bitmap,再创建一个canvas，绑定bitmap，最后用picture去绘制。
-12345678910111213//获取Picture对象Picture picture = wv_capture.capturePicture();//得到图片的宽和高（没有reflect">
+通过调用webview.capturePicture(),得到一个picture对象，根据图像的宽和高创建一个Bitmap,再创建一个canvas，绑定bitmap，最后用picture去绘制。">
   
     <link rel="alternative" href="/atom.xml" title="littleKang的博客" type="application/atom+xml">
   
@@ -212,6 +209,7 @@
       
         <p><strong>第一种方式</strong></p>
 <p>通过调用webview.capturePicture(),得到一个picture对象，根据图像的宽和高创建一个Bitmap,再创建一个canvas，绑定bitmap，最后用picture去绘制。</p>
+<a id="more"></a>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取Picture对象</span></span><br><span class="line">Picture picture = wv_capture.capturePicture();</span><br><span class="line"><span class="comment">//得到图片的宽和高（没有reflect图片内容）</span></span><br><span class="line"><span class="keyword">int</span> width = picture.getWidth();</span><br><span class="line"><span class="keyword">int</span> height = picture.getHeight();</span><br><span class="line"><span class="keyword">if</span> (width &gt; <span class="number">0</span> &amp;&amp; height &gt; <span class="number">0</span>) &#123;</span><br><span class="line">	<span class="comment">//创建位图</span></span><br><span class="line">    Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);</span><br><span class="line">    Canvas canvas = <span class="keyword">new</span> Canvas(bitmap);</span><br><span class="line">	<span class="comment">//绘制(会调用native方法，完成图形绘制)</span></span><br><span class="line">    picture.draw(canvas);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这种方式可以获取webview中已加载的所有数据图像，也就是长截屏的效果。这种方式在Android 4.4以下是没有问题的，但是在5.0以上就行不通了。capturePicture()方法在4.4中废弃掉了，官方建议使用onDrow()方法来获取webview的bitmap快照。具体实现如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line"><span class="comment">//获取webview缩放率</span></span><br><span class="line"><span class="keyword">float</span> scale = wv_capture.getScale();</span><br><span class="line"><span class="comment">//得到缩放后webview内容的高度</span></span><br><span class="line"><span class="keyword">int</span> webViewHeight = (<span class="keyword">int</span>) (wv_capture.getContentHeight()*scale);</span><br><span class="line">Bitmap bitmap = Bitmap.createBitmap(wv_capture.getWidth(),webViewHeight, Bitmap.Config.ARGB_8888);</span><br><span class="line">Canvas canvas = <span class="keyword">new</span> Canvas(bitmap);</span><br><span class="line"><span class="comment">//绘制</span></span><br><span class="line">wv_capture.draw(canvas);</span><br></pre></td></tr></table></figure>
