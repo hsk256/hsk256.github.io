@@ -7,22 +7,19 @@
   <title>Android从按下开机键到启动发生了什么 | littleKang的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="作为一个Android开发者，了解整个系统架构是必须的，所以这篇就总结一下Android手机从按下开机键到启动这一过程发生了什么。
-要了解Android手机启动过程，我们先来了解一下基于linux系统的电脑从按下电源键的那一刻起，发生了什么，这样类比可以更好的理解Android手机的启动过程。
-基于Linux的pc启动过程我们都知道，所有的程序软件包括操作系统都是运行在内存中的，然而我们的操作系统">
+要了解Android手机启动过程，我们先来了解一下基于linux系统的电脑从按下电源键的那一刻起，发生了什么，这样类比可以更好的理解Android手机的启动过程。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android从按下开机键到启动发生了什么">
 <meta property="og:url" content="http://www.littleKang.com/2016/05/12/AndroidStart/index.html">
 <meta property="og:site_name" content="littleKang的博客">
 <meta property="og:description" content="作为一个Android开发者，了解整个系统架构是必须的，所以这篇就总结一下Android手机从按下开机键到启动这一过程发生了什么。
-要了解Android手机启动过程，我们先来了解一下基于linux系统的电脑从按下电源键的那一刻起，发生了什么，这样类比可以更好的理解Android手机的启动过程。
-基于Linux的pc启动过程我们都知道，所有的程序软件包括操作系统都是运行在内存中的，然而我们的操作系统">
+要了解Android手机启动过程，我们先来了解一下基于linux系统的电脑从按下电源键的那一刻起，发生了什么，这样类比可以更好的理解Android手机的启动过程。">
 <meta property="og:image" content="http://gityuan.com/images/android-process/android-boot.jpg">
-<meta property="og:updated_time" content="2016-05-12T06:13:39.000Z">
+<meta property="og:updated_time" content="2016-05-12T07:27:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android从按下开机键到启动发生了什么">
 <meta name="twitter:description" content="作为一个Android开发者，了解整个系统架构是必须的，所以这篇就总结一下Android手机从按下开机键到启动这一过程发生了什么。
-要了解Android手机启动过程，我们先来了解一下基于linux系统的电脑从按下电源键的那一刻起，发生了什么，这样类比可以更好的理解Android手机的启动过程。
-基于Linux的pc启动过程我们都知道，所有的程序软件包括操作系统都是运行在内存中的，然而我们的操作系统">
+要了解Android手机启动过程，我们先来了解一下基于linux系统的电脑从按下电源键的那一刻起，发生了什么，这样类比可以更好的理解Android手机的启动过程。">
 <meta name="twitter:image" content="http://gityuan.com/images/android-process/android-boot.jpg">
   
     <link rel="alternative" href="/atom.xml" title="littleKang的博客" type="application/atom+xml">
@@ -206,6 +203,7 @@
       
         <p>作为一个Android开发者，了解整个系统架构是必须的，所以这篇就总结一下Android手机从按下开机键到启动这一过程发生了什么。</p>
 <p>要了解Android手机启动过程，我们先来了解一下基于linux系统的电脑从按下电源键的那一刻起，发生了什么，这样类比可以更好的理解Android手机的启动过程。</p>
+<a id="more"></a>
 <h3 id="基于Linux的pc启动过程"><a href="#基于Linux的pc启动过程" class="headerlink" title="基于Linux的pc启动过程"></a>基于Linux的pc启动过程</h3><p>我们都知道，所有的程序软件包括操作系统都是运行在内存中的，然而我们的操作系统一般是存放在硬盘上的，当我们按下开机键的时候，此时内存中什么程序也没有，因此需要借助某种方式，将操作系统加载到内存中，而完成这项任务的就是<strong>BIOS</strong>。</p>
 <p>装过系统的人一定知道BIOS这个东西，那么它究竟是什么呢？<br>BIOS：Basic Input/Output System（基本输入输出系统），在IBM PC兼容系统上，是一种业界标准的固件接口（来自维基百科）。有点难以理解，其实BIOS是我们电脑启动时加载的第一个程序，这个程序不是由Java语言编写也不是由C语言编写，一般是汇编程序。BIOS程序固化在主板上的一块芯片上，是连接计算机硬件与操作系统的桥梁，它保存着计算机最重要的基本输入输出的程序、开机后自检程序和系统自启动程序。</p>
 <p>那么问题来了，BIOS程序又是怎么启动的？BIOS的启动，是由硬件完成的，Intel 80x86<br>系列的cpu的硬件都设计为加电（即开机瞬间）就进入16位实模式状态运行，此时将cpu的硬件逻辑设计为强行将CS的值设置为0xFFFF,IP的值设置为0x0000，这样CS:IP就指向了0xFFFF0这个位置，而这个位置就是BIOS程序的入口地址。因此这是一个硬件厂商之间的约定，所有的BIOS程序入口地址均为0xFFFF0，这样在开机的时候，就找到这个地址，如果该地址并没有代码段，那么计算机将会死机，如果这个地址处有代码段，将会执行这个代码段，并由此执行下去，即BIOS程序开始启动。<br><br><strong>补充：</strong><br><br>CS:代码段寄存器，存在于CPU中，指向CPU当前执行代码在内存中所在的区域。<br><br>IP：指令寄存器，存在于CPU中，记录将要执行的指令在代码段内的偏移地址，与CS组合即为将要执行的指令的内存地址。</p>
