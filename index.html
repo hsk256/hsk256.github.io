@@ -104,7 +104,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/webview/" style="font-size: 10px;">webview</a> <a href="/tags/日记/" style="font-size: 10px;">日记</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+						<a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/webview/" style="font-size: 10px;">webview</a> <a href="/tags/依赖注入/" style="font-size: 10px;">依赖注入</a> <a href="/tags/日记/" style="font-size: 10px;">日记</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
 					</div>
 				</section>
 				
@@ -167,6 +167,68 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-Dagger2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/20/Dagger2/" class="article-date">
+  	<time datetime="2016-05-20T14:57:04.000Z" itemprop="datePublished">2016-05-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/20/Dagger2/">Dagger2从入门到放弃再到恍然大悟</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>现在Dagger2在项目里用的越来越多了，最近花了些时间学习了一下Dagger2，这篇文章主要帮助理解Dagger2的注入实现过程，如有错误，还请指正!</p>
+<h3 id="什么是Dagger2"><a href="#什么是Dagger2" class="headerlink" title="什么是Dagger2"></a>什么是Dagger2</h3><p>Dagger2是Dagger的升级版，是一个依赖注入框架，现在由Google接手维护。 恩，这里有个关键字<strong>依赖注入</strong>，因此我们得先知道什么是依赖注入，才能更好的理解Dagger2。</p>
+<p>依赖注入是面向对象编程的一种设计模式，其目的是为了降低程序耦合，这个耦合就是类之间的依赖引起的。</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/依赖注入/">依赖注入</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/05/20/Dagger2/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-webviewCapture" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -355,66 +417,6 @@
 
 
   
-    <article id="post-ProxyModel" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/25/ProxyModel/" class="article-date">
-  	<time datetime="2016-03-25T14:50:10.000Z" itemprop="datePublished">2016-03-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/25/ProxyModel/">代理模式</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="什么是代理模式"><a href="#什么是代理模式" class="headerlink" title="什么是代理模式?"></a>什么是代理模式?</h3><p>举个生活中的例子：代理商。我们生活中买的许多物品都是通过代理商那里购买的，比如旅行社，代理旅行、机票等业务，代理出口商品。代理商并不产生这些产品，他们是从厂家拿货，所以虽然是通过代理商那里买到了产品，实际物品还是属于厂家那里。代理商作为一种中间层，可以为消费者带来许多遍历，消费者不需要购买物品的时候跑到生产厂家。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/03/25/ProxyModel/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-javaAnswer" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -459,6 +461,66 @@
       
         <p class="article-more-link">
           <a  href="/2016/03/25/javaAnswer/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-ProxyModel" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/25/ProxyModel/" class="article-date">
+  	<time datetime="2016-03-25T14:50:10.000Z" itemprop="datePublished">2016-03-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/25/ProxyModel/">代理模式</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="什么是代理模式"><a href="#什么是代理模式" class="headerlink" title="什么是代理模式?"></a>什么是代理模式?</h3><p>举个生活中的例子：代理商。我们生活中买的许多物品都是通过代理商那里购买的，比如旅行社，代理旅行、机票等业务，代理出口商品。代理商并不产生这些产品，他们是从厂家拿货，所以虽然是通过代理商那里买到了产品，实际物品还是属于厂家那里。代理商作为一种中间层，可以为消费者带来许多遍历，消费者不需要购买物品的时候跑到生产厂家。</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/03/25/ProxyModel/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
