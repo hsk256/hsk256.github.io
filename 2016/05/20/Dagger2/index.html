@@ -16,7 +16,7 @@
 <meta property="og:description" content="现在Dagger2在项目里用的越来越多了，最近花了些时间学习了一下Dagger2，这篇文章主要帮助理解Dagger2的注入实现过程，如有错误，还请指正!
 什么是Dagger2Dagger2是Dagger的升级版，是一个依赖注入框架，现在由Google接手维护。 恩，这里有个关键字依赖注入，因此我们得先知道什么是依赖注入，才能更好的理解Dagger2。
 依赖注入是面向对象编程的一种设计模式，其目的是">
-<meta property="og:updated_time" content="2016-05-26T07:08:24.000Z">
+<meta property="og:updated_time" content="2016-06-18T09:01:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dagger2从入门到放弃再到恍然大悟">
 <meta name="twitter:description" content="现在Dagger2在项目里用的越来越多了，最近花了些时间学习了一下Dagger2，这篇文章主要帮助理解Dagger2的注入实现过程，如有错误，还请指正!
@@ -251,7 +251,7 @@
 <p>额，貌似变得更复杂了，还不如不用Dagger2呢。不过仔细想想也是可以理解的，直接组合方式虽然简单，但是具有耦合性，为了解决这种耦合，可能就会多产生一些辅助类，让这种直接的依赖关系，变为间接，降低耦合。跟大多数设计模式一样，为了达到高内聚低耦合，往往会有很多接口与类，Daager2也是如此，虽然看似复杂了些，不过这在软件工程中是值得的。下面，就来分析下上面代码是什么意思。</p>
 <p>我们先看MainActivity里的代码，之前是直接声明MainPresenter，现在在声明的基础上加了一个注解@Inject，表明MainPresenter是需要注入到MainActivity中，即MainActivity依赖于MainPresenter，这里要注意的是，使用@Inject时，不能用private修饰符修饰类的成员属性。</p>
 <p>然后我们在MainPresenter的构造函数上同样加了@Inject注解。这样MainActivity里的mainPresenter与他的构造函数建立了某种联系。这种联系我们可以这样理解，当看到某个类被@Inject标记时，就会到他的构造方法中，如果这个构造方法也被@Inject标记的话，就会自动初始化这个类，从而完成依赖注入。</p>
-<p>然后，他们之间并不会凭空建立起联系，因此我们想到，肯定需要一个桥梁，将他们连接起来，也就是下面要介绍的Component。</p>
+<p>然而，他们之间并不会凭空建立起联系，因此我们想到，肯定需要一个桥梁，将他们连接起来，也就是下面要介绍的Component。</p>
 <p>Component是一个接口或者抽象类，用@Component注解标注（这里先不管括号里的modules），我们在这个接口中定义了一个inject()方法,参数是Mainactivity。然后rebuild一下项目，会生成一个以Dagger为前缀的Component类，这里是DaggerMainComponent，然后在MainActivity里完成下面代码.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DaggerMainComponent.builder()</span><br><span class="line">                .mainModule(<span class="keyword">new</span> MainModule(<span class="keyword">this</span>))</span><br><span class="line">                .build()</span><br><span class="line">                .inject(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure>
 <p>此时Component就将@Inject注解的mainPresenter与其构造函数联系了起来。此时，看到这里，如果是初学者的话，一定会非常迷惑，究竟是怎么建立起联系的，实例化过程在哪？别急，后面会讲解这个过程原理的。</p>
